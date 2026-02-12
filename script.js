@@ -436,12 +436,11 @@ function forceReturn(txId) {
   const now = new Date();
   tx.returnTime = now.toLocaleString();
   tx.condition = "Forced Return";
-  tx.penalty = 200; // Custom penalty for forced return
+  tx.penalty = 200;
   tx.status = "Returned";
   saveData();
   refreshTables();
   alert(`Forced return completed for ${tx.item}.`);
 }
 
-// Initial Load
 refreshTables();
