@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipment Borrowing System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+  <div class="container">
+  <h1><i class="fas fa-tools"></i> Equipment Borrowing & Returning System</h1>
+
+  <!-- SELECT MODE -->
+  <div class="card">
+  <h2>Select Transaction Type</h2>
+  <button type="button" id="showBorrow"><i class="fas fa-hand-holding"></i> Borrow Equipment</button>
+  <button type="button" id="showReturn"><i class="fas fa-undo"></i> Return Equipment</button>
+  </div>
+
+  <!-- BORROW SECTION -->
+  <div class="card hidden" id="borrowSection">
+  <h2><i class="fas fa-hand-holding"></i> Borrow Equipment</h2>
+
+  <form id="borrowForm">
+
+  <div class="form-group">
+  <label>Student ID:</label>
+  <input id="studentId" placeholder="YYYY-MM-XXXXX" required>
+  </div>
+
+  <div id="studentInfo" class="student-info hidden">
+  <p><strong>Name:</strong> <span id="sName">-</span></p>
+  <p><strong>Course:</strong> <span id="sCourse">-</span></p>
+  <p><strong>Year:</strong> <span id="sYear">-</span></p>
+  <p><strong>Borrow Time:</strong> <span id="borrowTime">-</span></p>
+  </div>
+
+  <div class="form-group">
+  <label>Equipment:</label>
+  <select id="equipSelect" required></select>
+  </div>
+
+  <div class="form-group">
+  <label>Duration:</label>
+  <select id="duration" required></select>
+  </div>
+
+  <div class="form-row">
+
+  <div class="form-group">
+  <label>Purpose:</label>
+  <select id="purpose" required>
+  <option value="">--Select Purpose--</option>
+  <option value="Defense">Defense</option>
+  <option value="Presentation">Presentation</option>
+  <option value="Research">Research</option>
+  <option value="Others">Others</option>
+  </select>
+  <input id="customPurpose" style="display:none;">
+  </div>
+
+  <div class="form-group">
+  <label>Subject:</label>
+  <select id="subject" disabled required></select>
+  </div>
+
+  </div>
+
+  <div class="form-row">
+
+  <div class="form-group">
+  <label>Main Area:</label>
+  <select id="mainArea">
+  <option value="">--Select Area--</option>
+  <option value="Lab 1">Lab 1</option>
+  <option value="Lab 2">Lab 2</option>
+  <option value="Lab 3">Lab 3</option>
+  </select>
+  </div>
+
+  <div class="form-group">
+  <label>Specific Room:</label>
+  <select id="specificRoom"></select>
+  </div>
+
+  </div>
+
+  <button id="borrowBtn" disabled>Borrow Equipment</button>
+  <button type="button" id="clearBtn">Clear</button>
+
+  <p id="borrowMessage"></p>
+
+  </form>
+  </div>
+
+  <!-- RETURN SECTION -->
+  <div class="card hidden" id="returnSection">
+  <h2><i class="fas fa-undo"></i> Return Equipment</h2>
+
+  <form id="returnForm">
+
+  <input id="returnStudentId" placeholder="Student ID" required>
+
+  <select id="returnSelect"></select>
+
+  <select id="condition">
+  <option value="OK">OK</option>
+  <option value="Damaged">Damaged</option>
+  <option value="Missing Parts">Missing Parts</option>
+  </select>
+
+  <button id="returnBtn">Confirm Return</button>
+
+  <p id="returnMessage"></p>
+
+  </form>
+  </div>
+
+  <!-- TRANSACTION HISTORY TABLE -->
+  <div class="card">
+  <h2><i class="fas fa-history"></i> Transaction History</h2>
+  <div class="transaction-table-wrapper">
+  <table class="transaction-table" id="transactionTable">
+  <thead>
+  <tr>
+  <th>Student ID</th><th>Name</th><th>Course</th><th>Year</th><th>Item</th><th>Code</th><th>Purpose</th><th>Subject</th><th>Lab/Room</th><th>Borrow Time</th><th>Duration (min)</th><th>Return Time</th><th>Status</th><th>Condition</th><th>Penalty</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Rows will be populated by JS -->
+  </tbody>
+  </table>
+  </div>
+  </div>
+
+  <!-- ADMIN PANEL (hidden by default) -->
+  <div class="card hidden" id="adminPanel">
+  <h2><i class="fas fa-cog"></i> Admin Panel</h2>
+  <button type="button" id="toggleAdminBtn"><i class="fas fa-lock"></i> Show Admin Panel</button>
+  <div class="hidden" id="adminContent">
+  <h3>Add Equipment</h3>
+  <form id="addEquipForm">
+  <input id="newEquipName" placeholder="Equipment Name" required>
+  <input id="newEquipCode" placeholder="Equipment Code" required>
+  <button type="submit">Add Equipment</button>
+  </form>
+  <h3>All Equipment</h3>
+  <ul id="allEquipList"></ul>
+  <h3>Search Transactions</h3>
+  <input id="searchTransaction" placeholder="Search by Student ID, Name, or Item">
+  <table class="transaction-table" id="adminTransactionTable">
+  <thead>
+  <tr>
+  <th>Student ID</th><th>Name</th><th>Item</th><th>Status</th><th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Rows will be populated by JS -->
+  </tbody>
+  </table>
+  </div>
+  </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+  </body>
+</html>

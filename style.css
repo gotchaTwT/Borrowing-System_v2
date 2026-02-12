@@ -1,0 +1,416 @@
+/* ---------------- VARIABLES ---------------- */
+:root {
+  --primary: #b71c1c; /* Softer red for less harshness */
+  --primary-light: #ffebee; /* Very light red for accents */
+  --primary-hover: #d32f2f;
+  --secondary: #757575; /* Gray for secondary elements */
+  --accent: #ff5722; /* Orange-red for accents */
+  --tertiary: #424242; /* Darker gray */
+  --white: #ffffff;
+  --gray-bg: #f5f5f5; /* Light gray background */
+  --gray-border: #e0e0e0; /* Light gray borders */
+  --gray-light: #fafafa; /* Even lighter gray */
+  --text-dark: #212121; /* Dark gray for text */
+  --text-light: #757575; /* Medium gray for lighter text */
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadows */
+  --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  --transition: 0.3s ease;
+  --border-radius: 12px;
+  --gradient-bg: linear-gradient(145deg, var(--gray-bg), var(--gray-light));
+  --button-gradient: linear-gradient(135deg, var(--primary), var(--primary-hover));
+}
+
+/* ---------------- GLOBAL RESET ---------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--gradient-bg);
+  padding: 20px;
+  color: var(--text-dark);
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23b71c1c" opacity="0.03"/></svg>') repeat;
+  z-index: -1;
+}
+
+/* ---------------- CONTAINER ---------------- */
+.container {
+  max-width: 1400px;
+  margin: auto;
+  background: var(--white);
+  padding: 50px;
+  border-radius: 25px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* ---------------- HEADINGS ---------------- */
+h1, h2, h3 {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 3rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: var(--button-gradient);
+  border-radius: 2px;
+}
+
+h2 {
+  margin-bottom: 30px;
+  border-bottom: 4px solid var(--primary-light);
+  padding-bottom: 15px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+h3 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: var(--tertiary);
+}
+
+/* ---------------- CARDS ---------------- */
+.card {
+  background: var(--white);
+  padding: 30px;
+  margin-bottom: 40px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+  border: 1px solid var(--gray-border);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* ---------------- FORM ---------------- */
+.form-group { margin-bottom: 20px; }
+.form-row { display: flex; gap: 20px; flex-wrap: wrap; }
+.form-row .form-group { flex: 1; min-width: 200px; }
+
+label { 
+  font-weight: 600; 
+  display: block; 
+  margin-bottom: 8px; 
+  color: var(--text-dark); 
+  font-size: 1rem;
+}
+
+input, select {
+  width: 100%;
+  padding: 15px 18px;
+  border: 2px solid var(--gray-border);
+  border-radius: var(--border-radius);
+  transition: all var(--transition);
+  font-size: 1rem;
+  background: var(--white);
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 15px rgba(183, 28, 28, 0.3);
+  transform: scale(1.02);
+}
+
+input:disabled, select:disabled {
+  background: var(--gray-bg);
+  color: var(--text-light);
+}
+
+/* ---------------- BUTTONS ---------------- */
+button {
+  background: var(--button-gradient);
+  color: var(--white);
+  border: none;
+  padding: 15px 25px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition);
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(183, 28, 28, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+button:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--primary-hover), var(--primary));
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(183, 28, 28, 0.4);
+}
+
+button:disabled { 
+  background: var(--gray-border); 
+  cursor: not-allowed; 
+  box-shadow: none;
+  transform: none;
+}
+
+button i {
+  margin-right: 8px;
+}
+
+/* ---------------- MESSAGES ---------------- */
+.message { 
+  margin-top: 15px; 
+  font-weight: 600; 
+  font-size: 1rem;
+  padding: 12px 18px;
+  border-radius: var(--border-radius);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.error { color: var(--white); background: var(--primary); }
+.success { color: var(--white); background: var(--secondary); }
+
+/* ---------------- STUDENT INFO ---------------- */
+.student-info {
+  background: linear-gradient(135deg, var(--primary-light), #fce4ec);
+  padding: 25px;
+  border-radius: var(--border-radius);
+  margin-top: 20px;
+  box-shadow: var(--card-shadow);
+  border-left: 5px solid var(--primary);
+}
+
+.student-info p {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.hidden { 
+  display: none; 
+}
+
+/* ---------------- TRANSACTION TABLE WRAPPER ---------------- */
+.transaction-table-wrapper {
+  overflow-x: auto;
+  margin-top: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+}
+
+/* ---------------- TABLE STYLING ---------------- */
+.transaction-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 20px; /* Increased vertical spacing for less cramped feel */
+  font-size: 1rem; /* Slightly larger font */
+  min-width: 1200px; /* Increased min-width to prevent cramping */
+  background: var(--gray-bg);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.transaction-table th,
+.transaction-table td {
+  padding: 20px 15px; /* Increased padding for more space */
+  text-align: center;
+  vertical-align: middle;
+  word-wrap: break-word;
+  white-space: pre-wrap; /* Allow wrapping */
+  font-size: 0.95rem;
+}
+
+/* ---------------- HEADER ---------------- */
+.transaction-table thead th {
+  background: var(--button-gradient);
+  color: var(--white);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 25px 18px; /* More padding */
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* ---------------- ROWS ---------------- */
+.transaction-table tbody tr {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.25s, box-shadow 0.25s;
+  margin-bottom: 15px; /* More space between rows */
+}
+
+.transaction-table tbody tr:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* ---------------- STATUS BADGES ---------------- */
+.transaction-table td.status-borrowed { 
+  color: var(--white); 
+  font-weight: 600; 
+  background: var(--primary); 
+  border-radius: 20px; 
+  padding: 8px 12px; 
+}
+.transaction-table td.status-returned { 
+  color: var(--white); 
+  font-weight: 600; 
+  background: var(--secondary); 
+  border-radius: 20px; 
+  padding: 8px 12px; 
+}
+.transaction-table td.status-damaged { 
+  color: var(--white); 
+  font-weight: 600; 
+  background: var(--accent); 
+  border-radius: 20px; 
+  padding: 8px 12px; 
+}
+
+/* ---------------- ROUND FIRST & LAST CELLS ---------------- */
+.transaction-table tbody tr td:first-child {
+  border-top-left-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
+}
+
+.transaction-table tbody tr td:last-child {
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+/* ---------------- ADMIN LIST ---------------- */
+#allEquipList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: var(--white);
+  margin-bottom: 10px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+}
+
+#allEquipList li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badge.available { background: var(--secondary); color: var(--white); }
+.badge.unavailable { background: var(--primary); color: var(--white); }
+
+/* ---------------- MOBILE RESPONSIVE ---------------- */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .transaction-table thead { display: none; }
+
+  .transaction-table tbody tr {
+    display: block;
+    margin-bottom: 25px; /* More space on mobile */
+    padding: 25px; /* More padding */
+    border-radius: var(--border-radius);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  }
+
+  .transaction-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0; /* More padding */
+    text-align: left;
+    border-bottom: 1px solid var(--gray-border);
+    font-size: 0.95rem;
+    flex-wrap: wrap;
+  }
+
+  .transaction-table tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-right: 10px;
+    flex: 0 0 130px; /* Wider for labels */
+    text-align: left;
+  }
+
+  .transaction-table tbody td:last-child {
+    border-bottom: none;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
